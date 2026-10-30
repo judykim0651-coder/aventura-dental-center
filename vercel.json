@@ -1,0 +1,551 @@
+{
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/services/dental-cleaning-and-examinations",
+      "destination": "/services/dental-cleaning-examinations",
+      "permanent": true
+    },
+    {
+      "source": "/services/dental-crowns-and-dental-bridges",
+      "destination": "/services/dental-crowns-bridges",
+      "permanent": true
+    },
+    {
+      "source": "/services/dental-veneers-and-dental-laminates",
+      "destination": "/services/dental-veneers-laminates",
+      "permanent": true
+    },
+    {
+      "source": "/services/dentures-and-partial-dentures",
+      "destination": "/services/dentures-partial-dentures",
+      "permanent": true
+    },
+    {
+      "source": "/services/invisalign-vs-traditional-braces",
+      "destination": "/services/invisalign-vs-braces",
+      "permanent": true
+    },
+    {
+      "source": "/blog/daily-habits-you-need-for-long-term-oral-health",
+      "destination": "/blog/daily-habits-oral-health",
+      "permanent": true
+    },
+    {
+      "source": "/blog/dental-checkups-your-guide-to-a-healthier-smile-in-aventura-fl",
+      "destination": "/blog/dental-checkups-guide",
+      "permanent": true
+    },
+    {
+      "source": "/blog/dental-fillings-in-aventura-fl-what-they-are-and-when-you-need-them",
+      "destination": "/blog/dental-fillings",
+      "permanent": true
+    },
+    {
+      "source": "/blog/discover-the-hidden-secrets-of-dental-x-rays-a-guide-for-patients",
+      "destination": "/blog/hidden-secrets-dental-xrays",
+      "permanent": true
+    },
+    {
+      "source": "/blog/discovering-clear-aligners-your-guide-to-treatment-in-aventura-fl",
+      "destination": "/blog/discovering-clear-aligners",
+      "permanent": true
+    },
+    {
+      "source": "/blog/essential-guide-to-modern-dental-fillings-healthier-teeth-and-a-more-natural-smile",
+      "destination": "/blog/modern-dental-fillings",
+      "permanent": true
+    },
+    {
+      "source": "/blog/expert-guide-to-dental-crowns-what-they-do-and-when-you-need-one",
+      "destination": "/blog/expert-guide-dental-crowns",
+      "permanent": true
+    },
+    {
+      "source": "/blog/how-often-should-you-visit-the-dentist-a-personalized-guide-for-healthier-smiles",
+      "destination": "/blog/how-often-visit-dentist",
+      "permanent": true
+    },
+    {
+      "source": "/blog/porcelain-vs-composite-veneers-in-aventura-fl",
+      "destination": "/blog/porcelain-vs-composite-veneers",
+      "permanent": true
+    },
+    {
+      "source": "/blog/stay-ahead-of-dental-problems-your-guide-to-preventive-dentistry-in-aventura-fl",
+      "destination": "/blog/preventive-dentistry",
+      "permanent": true
+    },
+    {
+      "source": "/blog/the-complete-guide-to-tooth-pain-common-causes-and-when-to-see-a-dentist",
+      "destination": "/blog/complete-guide-tooth-pain",
+      "permanent": true
+    },
+    {
+      "source": "/blog/the-confidence-curve-before-and-after-a-dental-treatment-that-transforms-your-smile",
+      "destination": "/blog/confidence-curve",
+      "permanent": true
+    },
+    {
+      "source": "/blog/the-hidden-costs-of-skipping-dental-checkups-protect-your-smile-and-wallet",
+      "destination": "/blog/hidden-costs-skipping-checkups",
+      "permanent": true
+    },
+    {
+      "source": "/blog/your-go-to-guide-for-dental-implants-smile-brighter-in-aventura-fl",
+      "destination": "/blog/dental-implants-guide",
+      "permanent": true
+    },
+    {
+      "source": "/blog/categories",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tags",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/team/authors",
+      "destination": "/team",
+      "permanent": true
+    },
+    {
+      "source": "/locations/florida/aventura/:rest*",
+      "destination": "/locations/aventura",
+      "permanent": true
+    },
+    {
+      "source": "/locations/florida/hallandale-beach/:rest*",
+      "destination": "/locations/hallandale-beach",
+      "permanent": true
+    },
+    {
+      "source": "/locations/florida/north-miami-beach/:rest*",
+      "destination": "/locations/north-miami-beach",
+      "permanent": true
+    },
+    {
+      "source": "/locations/florida/sunny-isles-beach/:rest*",
+      "destination": "/locations/sunny-isles-beach",
+      "permanent": true
+    },
+    {
+      "source": "/locations/florida/golden-beach/:rest*",
+      "destination": "/locations/golden-beach",
+      "permanent": true
+    },
+    {
+      "source": "/locations/florida/hollywood/:rest*",
+      "destination": "/locations/hollywood",
+      "permanent": true
+    },
+    {
+      "source": "/locations/florida/miami-gardens/:rest*",
+      "destination": "/locations/miami-gardens",
+      "permanent": true
+    },
+    {
+      "source": "/locations/florida/pembroke-park/:rest*",
+      "destination": "/locations/pembroke-park",
+      "permanent": true
+    },
+    {
+      "source": "/locations/florida/ives-estates/:rest*",
+      "destination": "/locations/ives-estates",
+      "permanent": true
+    },
+    {
+      "source": "/locations/florida/:path*",
+      "destination": "/locations",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/:page*",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/author/:slug*",
+      "destination": "/team",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/our-services",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/dental-services",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/team/dr-bistritz",
+      "destination": "/team/dr-david-bistritz",
+      "permanent": true
+    },
+    {
+      "source": "/team/david-bistritz",
+      "destination": "/team/dr-david-bistritz",
+      "permanent": true
+    },
+    {
+      "source": "/locations/florida",
+      "destination": "/locations",
+      "permanent": true
+    },
+    {
+      "source": "/services/teeth-whitening",
+      "destination": "/services/professional-teeth-whitening",
+      "permanent": true
+    },
+    {
+      "source": "/services/professional-teeth-whitening-aventura",
+      "destination": "/services/professional-teeth-whitening",
+      "permanent": true
+    },
+    {
+      "source": "/services/teeth-whitening-aventura-fl",
+      "destination": "/services/professional-teeth-whitening",
+      "permanent": true
+    },
+    {
+      "source": "/services/dental-implants-aventura-fl",
+      "destination": "/services/dental-implants",
+      "permanent": true
+    },
+    {
+      "source": "/services/dental-implants-aventura",
+      "destination": "/services/dental-implants",
+      "permanent": true
+    },
+    {
+      "source": "/services/invisalign-aventura-fl",
+      "destination": "/services/invisalign-dentist",
+      "permanent": true
+    },
+    {
+      "source": "/services/invisalign-aventura",
+      "destination": "/services/invisalign-dentist",
+      "permanent": true
+    },
+    {
+      "source": "/services/emergency-dental",
+      "destination": "/services/emergency-dentist",
+      "permanent": true
+    },
+    {
+      "source": "/services/emergency-dental-care",
+      "destination": "/services/emergency-dentist",
+      "permanent": true
+    },
+    {
+      "source": "/services/dental-emergency",
+      "destination": "/services/emergency-dentist",
+      "permanent": true
+    },
+    {
+      "source": "/services/veneers",
+      "destination": "/services/dental-veneers-laminates",
+      "permanent": true
+    },
+    {
+      "source": "/services/porcelain-veneers",
+      "destination": "/services/dental-veneers-laminates",
+      "permanent": true
+    },
+    {
+      "source": "/services/crowns",
+      "destination": "/services/dental-crowns-bridges",
+      "permanent": true
+    },
+    {
+      "source": "/services/dental-crowns",
+      "destination": "/services/dental-crowns-bridges",
+      "permanent": true
+    },
+    {
+      "source": "/services/bridges",
+      "destination": "/services/dental-crowns-bridges",
+      "permanent": true
+    },
+    {
+      "source": "/services/dental-bridges",
+      "destination": "/services/dental-crowns-bridges",
+      "permanent": true
+    },
+    {
+      "source": "/services/implants",
+      "destination": "/services/dental-implants",
+      "permanent": true
+    },
+    {
+      "source": "/services/dental-cleaning",
+      "destination": "/services/dental-cleaning-examinations",
+      "permanent": true
+    },
+    {
+      "source": "/services/teeth-cleaning",
+      "destination": "/services/dental-cleaning-examinations",
+      "permanent": true
+    },
+    {
+      "source": "/services/root-canal",
+      "destination": "/services/root-canal-treatment",
+      "permanent": true
+    },
+    {
+      "source": "/services/dentures",
+      "destination": "/services/dentures-partial-dentures",
+      "permanent": true
+    },
+    {
+      "source": "/services/partial-dentures",
+      "destination": "/services/dentures-partial-dentures",
+      "permanent": true
+    },
+    {
+      "source": "/services/bonding",
+      "destination": "/services/dental-bonding",
+      "permanent": true
+    },
+    {
+      "source": "/services/composite-bonding",
+      "destination": "/services/dental-bonding",
+      "permanent": true
+    },
+    {
+      "source": "/services/tooth-extractions",
+      "destination": "/services/tooth-extraction",
+      "permanent": true
+    },
+    {
+      "source": "/services/extractions",
+      "destination": "/services/tooth-extraction",
+      "permanent": true
+    },
+    {
+      "source": "/services/fillings",
+      "destination": "/services/composite-fillings",
+      "permanent": true
+    },
+    {
+      "source": "/services/composite-filling",
+      "destination": "/services/composite-fillings",
+      "permanent": true
+    },
+    {
+      "source": "/services/checkup",
+      "destination": "/services/dental-checkup",
+      "permanent": true
+    },
+    {
+      "source": "/services/dental-exam",
+      "destination": "/services/dental-checkup",
+      "permanent": true
+    },
+    {
+      "source": "/services/all-on-4",
+      "destination": "/services/all-on-4-implants",
+      "permanent": true
+    },
+    {
+      "source": "/services/all-on-four",
+      "destination": "/services/all-on-4-implants",
+      "permanent": true
+    },
+    {
+      "source": "/services/smile-makeovers",
+      "destination": "/services/smile-makeover",
+      "permanent": true
+    },
+    {
+      "source": "/services/full-mouth-restoration",
+      "destination": "/services/full-mouth-reconstruction",
+      "permanent": true
+    },
+    {
+      "source": "/cosmetic-dentistry/veneers",
+      "destination": "/services/dental-veneers-laminates",
+      "permanent": true
+    },
+    {
+      "source": "/cosmetic-dentistry/whitening",
+      "destination": "/services/professional-teeth-whitening",
+      "permanent": true
+    },
+    {
+      "source": "/cosmetic-dentistry/bonding",
+      "destination": "/services/dental-bonding",
+      "permanent": true
+    },
+    {
+      "source": "/cosmetic-dentistry/smile-makeover",
+      "destination": "/services/smile-makeover",
+      "permanent": true
+    },
+    {
+      "source": "/cosmetic-dentistry/invisalign",
+      "destination": "/services/invisalign-dentist",
+      "permanent": true
+    },
+    {
+      "source": "/family-dentistry/dental-checkup",
+      "destination": "/services/dental-checkup",
+      "permanent": true
+    },
+    {
+      "source": "/family-dentistry/dental-cleaning",
+      "destination": "/services/dental-cleaning-examinations",
+      "permanent": true
+    },
+    {
+      "source": "/family-dentistry/fillings",
+      "destination": "/services/composite-fillings",
+      "permanent": true
+    },
+    {
+      "source": "/preventive-dentistry/dental-cleaning",
+      "destination": "/services/dental-cleaning-examinations",
+      "permanent": true
+    },
+    {
+      "source": "/preventive-dentistry/dental-checkup",
+      "destination": "/services/dental-checkup",
+      "permanent": true
+    },
+    {
+      "source": "/preventive-dentistry/dental-x-rays",
+      "destination": "/services/dental-checkup",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/services/:slug",
+      "destination": "/SERVICES/:slug.html"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/BLOG/:slug.html"
+    },
+    {
+      "source": "/team/:slug",
+      "destination": "/team/:slug.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/services",
+      "destination": "/services.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/locations",
+      "destination": "/locations.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog.html"
+    },
+    {
+      "source": "/team",
+      "destination": "/team.html"
+    },
+    {
+      "source": "/faq",
+      "destination": "/faq.html"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy-policy.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms.html"
+    },
+    {
+      "source": "/cosmetic-dentistry",
+      "destination": "/cosmetic-dentistry.html"
+    },
+    {
+      "source": "/family-dentistry",
+      "destination": "/family-dentistry.html"
+    },
+    {
+      "source": "/preventive-dentistry",
+      "destination": "/preventive-dentistry.html"
+    },
+    {
+      "source": "/locations/aventura",
+      "destination": "/aventura.html"
+    },
+    {
+      "source": "/locations/hallandale-beach",
+      "destination": "/hallandale-beach.html"
+    },
+    {
+      "source": "/locations/north-miami-beach",
+      "destination": "/north-miami-beach.html"
+    },
+    {
+      "source": "/locations/sunny-isles-beach",
+      "destination": "/sunny-isles-beach.html"
+    },
+    {
+      "source": "/locations/golden-beach",
+      "destination": "/golden-beach.html"
+    },
+    {
+      "source": "/locations/hollywood",
+      "destination": "/hollywood.html"
+    },
+    {
+      "source": "/locations/miami-gardens",
+      "destination": "/miami-gardens.html"
+    },
+    {
+      "source": "/locations/pembroke-park",
+      "destination": "/pembroke-park.html"
+    },
+    {
+      "source": "/locations/ives-estates",
+      "destination": "/ives-estates.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains" },
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.callrail.com https://js.callrail.com https://maps.gstatic.com https://maps.googleapis.com https://www.googletagmanager.com https://www.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cdn.callrail.com https://js.callrail.com https://maps.googleapis.com https://api.web3forms.com https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com https://*.analytics.google.com https://www.clarity.ms https://*.clarity.ms; frame-src https://www.google.com https://maps.google.com; form-action 'self' https://api.web3forms.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'" }
+      ]
+    }
+  ]
+}

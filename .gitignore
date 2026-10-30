@@ -1,0 +1,20 @@
+# Local Vercel link (project/org IDs) — Vercel's Git integration manages this
+.vercel
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Node
+node_modules
+
+# Internal planning / backups — not part of the deliverable
+.planning
+.backup-phase04
+.backup-phase05
+.backup-phase06
+
+# Env / secrets (none expected in a static site, but just in case)
+.env
+.env.*
+*.log

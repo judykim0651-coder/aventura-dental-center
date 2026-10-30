@@ -1,0 +1,51 @@
+/* medical_services_2 — Design Tokens */
+:root {
+  --primary: 195 100% 30%;
+  --primary-hover: 195 100% 24%;
+  --primary-foreground: 0 0% 100%;
+  --muted: 0 0% 100%;
+  --muted-foreground: 210 11% 15%;
+  --text: 210 11% 15%;
+  --text-80: hsla(210, 11%, 15%, 0.8);
+  --text-70: hsla(210, 11%, 15%, 0.7);
+  --text-60: hsla(210, 11%, 15%, 0.6);
+  --background: 0 0% 100%;
+  --background-50: 0 0% 98%;
+  --background-600: 0 0% 96%;
+  --background-700: 0 0% 94%;
+  --background-800: 210 20% 12%;
+  --background-900: 210 20% 8%;
+  --background-950: 0 0% 97%;
+  --border: 210 14% 89%;
+  --card: 0 0% 100%;
+  --destructive: 0 84% 60%;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.15);
+  --radius: 16px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+  --font-heading: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --max-w-7xl: 1280px;
+  --section-px: 16px;
+  --section-py: 48px;
+  --nav-offset: 48px;
+  --cta-header-h: 48px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --section-px: 32px;
+    --section-py: 64px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --section-px: 64px;
+  }
+}

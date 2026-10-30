@@ -1,0 +1,101 @@
+/* Base reset & typography */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  color: hsl(var(--text));
+  background: hsl(var(--background));
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; }
+ul, ol { list-style: none; }
+
+/* Element-level heading scale (DSYS-06) — low-specificity defaults so class-LESS
+   headings inherit the design-system type scale instead of the UA default. Only the
+   two legal pages (/privacy-policy, /terms) carry class-less headings; every
+   class-styled heading (.section-title, .page-hero h1, .mission-band__title,
+   .service-card__body h3, …) has higher specificity and overrides these. No
+   !important; tokens.css untouched. Class-styled regression is proven RENDERED in
+   the 08-04 capstone, never by reading CSS. */
+h1 { font-size: 3rem;     font-weight: 600; line-height: 1.2; }
+h2 { font-size: 1.875rem; font-weight: 600; line-height: 1.25; }
+h3 { font-size: 1.125rem; font-weight: 600; line-height: 1.35; }
+h4 { font-size: 1rem;     font-weight: 600; }
+
+.font-heading { font-family: var(--font-heading); }
+.text-primary { color: hsl(var(--primary)); }
+.text-muted-foreground { color: hsl(var(--text-70)); }
+.text-highlight { color: hsl(var(--primary)); }
+
+.container {
+  width: 100%;
+  max-width: var(--max-w-7xl);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--section-px);
+  padding-right: var(--section-px);
+}
+
+.section {
+  padding-top: var(--section-py);
+  padding-bottom: var(--section-py);
+  background: hsl(var(--background));
+}
+
+.section--muted { background: hsl(var(--background-950)); }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* Skip-to-content link (A11Y-10 / WCAG 2.4.1) — reuses the .sr-only off-screen
+   pattern: invisible-but-focusable until it receives focus, then slides into the
+   top-left as an on-brand pill (D-11). First Tab target on every page. */
+.skip-link {
+  position: absolute; left: 8px; top: -60px;
+  z-index: 2000;
+  padding: 12px 18px; border-radius: 9999px;
+  background: hsl(var(--primary)); color: hsl(var(--primary-foreground));
+  font-weight: 600; text-decoration: none;
+  transition: top 0.2s ease;
+}
+.skip-link:focus { top: 8px; outline: 2px solid #fff; outline-offset: 2px; }
+
+/* Scroll animations */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.scroll-animate.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up { animation: fade-in-up 0.7s ease forwards; }
+
+/* Reduced motion (A11Y-07 / WCAG 2.3.3 + supports 2.2.2) — site-wide layer.
+   Overrides the `html { scroll-behavior: smooth }` default above, neutralises
+   every animation/transition, and reveals `.scroll-animate` bands so users who
+   set the OS "reduce motion" flag are not left with an invisible opacity:0 band
+   (e.g. the homepage `.stats-grid.scroll-animate`). The hero auto-advance is
+   stopped separately by hero-carousel.js's own reduced-motion guard (Phase 6). */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .scroll-animate { opacity: 1 !important; transform: none !important; }
+}
