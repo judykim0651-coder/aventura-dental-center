@@ -1,0 +1,7 @@
+{
+  "name": "aventura-dental-center-site",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build-blog.mjs"
+  }
+}
