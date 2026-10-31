@@ -1,7 +1,6 @@
 {
   "cleanUrls": false,
   "trailingSlash": false,
-  "buildCommand": "npm run build",
   "redirects": [
     {
       "source": "/services/dental-cleaning-and-examinations",
