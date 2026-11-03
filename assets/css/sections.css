@@ -2009,6 +2009,31 @@ a.contact-info-panel__value:hover {
   margin: 24px 0;
   border-radius: var(--radius-lg);
 }
+/* block + overflow keeps wide comparison tables scrollable on phones */
+.blog-post-prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 24px 0;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.blog-post-prose caption {
+  padding-bottom: 8px;
+  font-weight: 600;
+  text-align: left;
+  color: hsl(var(--text));
+}
+.blog-post-prose th,
+.blog-post-prose td {
+  min-width: 140px;
+  padding: 10px 12px;
+  border: 1px solid hsl(var(--border));
+  text-align: left;
+  vertical-align: top;
+}
+.blog-post-prose th { background: hsl(var(--border) / 0.4); font-weight: 600; }
 
 .blog-post-sidebar {
   display: none;
