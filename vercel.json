@@ -1,6 +1,9 @@
 {
   "cleanUrls": false,
   "trailingSlash": false,
+  "buildCommand": "node scripts/build-blog.mjs",
+  "outputDirectory": ".",
+  "outputDirectory": ".",
   "redirects": [
     {
       "source": "/services/dental-cleaning-and-examinations",

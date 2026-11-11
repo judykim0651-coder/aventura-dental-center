@@ -1,6 +1,4 @@
-*.md
 partials
-scripts
 .planning
 .backup-phase*
 .backup-phase05
