@@ -133,14 +133,21 @@ function legacyCard(cards, title) {
   return card.startsWith('          ') ? card : `          ${card}`;
 }
 
+// featuredImage is either a file in img/ or an absolute https URL (MEGA-published
+// posts host their hero on S3). Returns the src relative to the page's folder.
+function heroSrc(post, prefix) {
+  const value = String(post.featuredImage || '').trim();
+  if (/^https:\/\//i.test(value)) return value;
+  const file = value && fs.existsSync(path.join(root, 'img', value)) ? value : 'blog-hero.jpg';
+  return `${prefix}${file}`;
+}
+
 function newCard(post) {
-  const image = post.featuredImage && fs.existsSync(path.join(root, 'img', post.featuredImage))
-    ? post.featuredImage
-    : 'blog-hero.jpg';
+  const image = heroSrc(post, 'img/');
   const excerpt = post.description || post.excerpt || `${post.title}. Read this guide from Aventura Dental Center.`;
   const date = post.date || '';
   const tag = post.tag || 'DentalTreatment';
-  return `          <a href="/blog/${escapeHtml(post.slug)}" class="post-card">\n            <span class="post-card__badge">${escapeHtml(tag)}</span>\n            <img src="img/${escapeHtml(image)}" alt="${escapeHtml(post.title)}" loading="lazy">\n            <div class="post-card__gradient" aria-hidden="true"></div>\n            <div class="post-card__content">\n              <h3>${escapeHtml(post.title)}</h3>\n              <p class="post-card__excerpt">${escapeHtml(excerpt)}</p>\n              <div class="post-card__meta">\n                <span class="post-card__author">${escapeHtml(post.author || 'Aventura Dental Center')}</span>\n                <span class="post-card__date">${escapeHtml(date)}${post.readTime ? ` · ${escapeHtml(post.readTime)} read` : ''}</span>\n              </div>\n              <div class="post-card__cta-row"><div class="post-card__arrow" aria-hidden="true">→</div></div>\n            </div>\n          </a>`;
+  return `          <a href="/blog/${escapeHtml(post.slug)}" class="post-card">\n            <span class="post-card__badge">${escapeHtml(tag)}</span>\n            <img src="${escapeHtml(image)}" alt="${escapeHtml(post.title)}" loading="lazy">\n            <div class="post-card__gradient" aria-hidden="true"></div>\n            <div class="post-card__content">\n              <h3>${escapeHtml(post.title)}</h3>\n              <p class="post-card__excerpt">${escapeHtml(excerpt)}</p>\n              <div class="post-card__meta">\n                <span class="post-card__author">${escapeHtml(post.author || 'Aventura Dental Center')}</span>\n                <span class="post-card__date">${escapeHtml(date)}${post.readTime ? ` · ${escapeHtml(post.readTime)} read` : ''}</span>\n              </div>\n              <div class="post-card__cta-row"><div class="post-card__arrow" aria-hidden="true">→</div></div>\n            </div>\n          </a>`;
 }
 
 function updateIndex(posts, current = currentCards()) {
@@ -169,9 +176,7 @@ function renderNewPages(posts, cards) {
     // The original site keeps hand-built HTML for these legacy posts. Only
     // render a file when a new markdown post has no existing card/page yet.
     if (fs.existsSync(output) || cards.has(post.title)) continue;
-    const image = post.featuredImage && fs.existsSync(path.join(root, 'img', post.featuredImage))
-      ? post.featuredImage
-      : 'blog-hero.jpg';
+    const image = heroSrc(post, '../img/');
     const canonical = `${siteUrl}/blog/${post.slug}`;
     const description = post.description || post.excerpt || post.title;
     const pageHead = head
@@ -181,7 +186,7 @@ function renderNewPages(posts, cards) {
       .replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${escapeHtml(post.title)} | Aventura Dental Center">`)
       .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${escapeHtml(description)}">`)
       .replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${canonical}">`);
-    const body = `<main id="main" tabindex="-1">\n    <section class="section section--blog-post blog-post-page-top" aria-labelledby="blog-post-heading">\n      <div class="container">\n        <div class="blog-post-layout scroll-animate">\n          <article class="blog-post-main">\n            <nav class="breadcrumb breadcrumb--light" aria-label="Breadcrumb"><a href="/">Home</a> &gt; <a href="/blog">Blog</a> &gt; ${escapeHtml(post.title)}</nav>\n            <h1 class="blog-post-title" id="blog-post-heading">${escapeHtml(post.title)}</h1>\n            <div class="blog-post-meta-row"><p>Published ${escapeHtml(post.date || '')} by <a href="/blog">${escapeHtml(post.author || 'Aventura Dental Center')}</a></p><a href="/blog" class="blog-post-category">${escapeHtml(post.tag || 'DentalTreatment')}</a></div>\n            <div class="blog-post-featured"><img src="../img/${escapeHtml(image)}" alt="${escapeHtml(post.title)}" fetchpriority="high"></div>\n            <div class="blog-post-prose">${markdownToHtml(post.body)}</div>\n          </article>\n        </div>\n      </div>\n    </section>\n  </main>`;
+    const body = `<main id="main" tabindex="-1">\n    <section class="section section--blog-post blog-post-page-top" aria-labelledby="blog-post-heading">\n      <div class="container">\n        <div class="blog-post-layout scroll-animate">\n          <article class="blog-post-main">\n            <nav class="breadcrumb breadcrumb--light" aria-label="Breadcrumb"><a href="/">Home</a> &gt; <a href="/blog">Blog</a> &gt; ${escapeHtml(post.title)}</nav>\n            <h1 class="blog-post-title" id="blog-post-heading">${escapeHtml(post.title)}</h1>\n            <div class="blog-post-meta-row"><p>Published ${escapeHtml(post.date || '')} by <a href="/blog">${escapeHtml(post.author || 'Aventura Dental Center')}</a></p><a href="/blog" class="blog-post-category">${escapeHtml(post.tag || 'DentalTreatment')}</a></div>\n            <div class="blog-post-featured"><img src="${escapeHtml(image)}" alt="${escapeHtml(post.title)}" fetchpriority="high"></div>\n            <div class="blog-post-prose">${markdownToHtml(post.body)}</div>\n          </article>\n        </div>\n      </div>\n    </section>\n  </main>`;
     fs.writeFileSync(output, `${pageHead}${body}${tail}`);
   }
 }
