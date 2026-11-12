@@ -191,8 +191,45 @@ function renderNewPages(posts, cards) {
   }
 }
 
+// Every post page the site serves (BLOG/<slug>.html, rewritten from
+// /blog/<slug>) must be in sitemap.xml. Only adds missing entries; skips
+// slugs that vercel.json redirects elsewhere.
+function updateSitemap(posts) {
+  const sitemapPath = path.join(root, 'sitemap.xml');
+  if (!fs.existsSync(sitemapPath)) return 0;
+  let sitemap = fs.readFileSync(sitemapPath, 'utf8');
+  const redirected = new Set(
+    (JSON.parse(fs.readFileSync(path.join(root, 'vercel.json'), 'utf8')).redirects || [])
+      .map((redirect) => redirect.source)
+  );
+  const dates = new Map();
+  for (const post of posts) {
+    const parsed = dateValue(post.date);
+    if (!parsed) continue;
+    const day = new Date(parsed).toISOString().slice(0, 10);
+    dates.set(post.slug, day);
+    dates.set(post.source.replace(/\.md$/, ''), day);
+  }
+  const added = [];
+  for (const name of fs.readdirSync(legacyBlogDir).sort()) {
+    if (!name.endsWith('.html')) continue;
+    const slug = name.slice(0, -'.html'.length);
+    const loc = `${siteUrl}/blog/${slug}`;
+    if (redirected.has(`/blog/${slug}`) || sitemap.includes(`<loc>${loc}</loc>`)) continue;
+    const lastmod = dates.get(slug);
+    added.push(`  <url><loc>${loc}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}</url>`);
+  }
+  if (!added.length) return 0;
+  const end = sitemap.lastIndexOf('</urlset>');
+  if (end < 0) throw new Error('Could not locate </urlset> in sitemap.xml');
+  sitemap = `${sitemap.slice(0, end)}${added.join('\n')}\n${sitemap.slice(end)}`;
+  fs.writeFileSync(sitemapPath, sitemap);
+  return added.length;
+}
+
 const posts = readPosts();
 const current = currentCards();
 updateIndex(posts, current);
 renderNewPages(posts, current.cards);
-console.log(`Built blog index from ${posts.length} markdown posts.`);
+const sitemapAdded = updateSitemap(posts);
+console.log(`Built blog index from ${posts.length} markdown posts; added ${sitemapAdded} sitemap entries.`);
