@@ -114,6 +114,14 @@
 
   form.addEventListener('submit', function (ev) {
     ev.preventDefault();
+    // Honeypot: a hidden field real visitors never fill. If it has a value, it's a
+    // bot — silently drop it (show success, send nothing) so the bot doesn't retry.
+    var honeypot = form.querySelector('#cf-website');
+    if (honeypot && honeypot.value) {
+      form.reset();
+      setStatus('Thank you, ' + firstName() + '! Your message has been sent — our team will get back to you shortly.', true);
+      return;
+    }
     var firstInvalid = validate();
     if (firstInvalid) {
       setStatus('Please fix the highlighted fields and try again.', false);

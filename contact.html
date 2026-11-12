@@ -100,6 +100,11 @@
           <form class="contact-form" id="contactForm" novalidate aria-labelledby="contact-form-title">
             <h2 class="contact-form__title" id="contact-form-title">Send Us a Message</h2>
             <p class="contact-form__intro">Fill out the form and our team will get back to you shortly. Prefer to talk now? Call <a href="tel:+13059332501">(305) 933-2501</a>.</p>
+            <!-- Honeypot: off-screen and hidden from real visitors + screen readers; only bots fill it, and those submissions are silently dropped. -->
+            <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
+              <label for="cf-website">Leave this field blank</label>
+              <input type="text" id="cf-website" name="website" tabindex="-1" autocomplete="off">
+            </div>
             <div class="contact-form__row">
               <div class="contact-form__field">
                 <label for="cf-first">First Name <span class="contact-form__req" aria-hidden="true">*</span></label>
