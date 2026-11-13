@@ -142,6 +142,30 @@ function heroSrc(post, prefix) {
   return `${prefix}${file}`;
 }
 
+// Keep intrinsic dimensions on blog cards so the grid reserves image space
+// before local or MEGA-hosted featured images finish loading.
+const imageDimensions = new Map([
+  ['tooth-sensitivity-causes-when-to-see-a-dentist.webp', [1344, 768]],
+  ['cracked-tooth-symptoms.webp', [1600, 800]],
+  ['dry-socket-prevention-after-tooth-extraction-what-patients-should-know-923990.webp', [1600, 800]],
+  ['cracked-tooth-vs-cavity-what-patients-should-know-745661.webp', [1600, 800]],
+  ['root-canal-vs-dental-implant-what-to-know-527677.webp', [1344, 768]],
+  ['senior-dental-care-in-aventura-fl-what-to-expect-928466.webp', [1344, 768]],
+  ['how-much-does-a-tooth-extraction-cost-what-affects-the-price-955595.webp', [1600, 800]],
+  ['professional-teeth-whitening-vs-at-home-whitening-cost-results-and-safety-501339.webp', [1344, 768]],
+]);
+
+function addImageDimensions(card) {
+  return card.replace(/<img\b([^>]*?)>/, (tag, attributes) => {
+    if (/\bwidth="\d+"/.test(attributes) && /\bheight="\d+"/.test(attributes)) return tag;
+    const src = attributes.match(/\bsrc="([^"]+)"/)?.[1];
+    const filename = src ? decodeURIComponent(src.split('/').pop().split('?')[0]) : '';
+    const dimensions = imageDimensions.get(filename);
+    if (!dimensions) return tag;
+    return `<img${attributes} width="${dimensions[0]}" height="${dimensions[1]}">`;
+  });
+}
+
 function newCard(post) {
   const image = heroSrc(post, 'img/');
   const excerpt = post.description || post.excerpt || `${post.title}. Read this guide from Aventura Dental Center.`;
@@ -152,7 +176,7 @@ function newCard(post) {
 
 function updateIndex(posts, current = currentCards()) {
   const { index, cards } = current;
-  const cardHtml = posts.map((post) => legacyCard(cards, post.title) || newCard(post)).join('\n');
+  const cardHtml = posts.map((post) => addImageDimensions(legacyCard(cards, post.title) || newCard(post))).join('\n');
   const start = index.indexOf('<div class="blog-grid scroll-animate">');
   const end = index.indexOf('\n        </div>\n      </div>\n    </section>', start);
   if (start < 0 || end < 0) throw new Error('Could not locate the blog card grid in blog.html');
