@@ -75,6 +75,15 @@ function markdownToHtml(markdown) {
       continue;
     }
     if (line.startsWith('```')) continue;
+    const standaloneLink = line.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (standaloneLink) {
+      flushParagraph();
+      closeList();
+      const [, label, href] = standaloneLink;
+      const ctaType = /^tel:/i.test(href) ? 'primary' : 'secondary';
+      html.push(`<p data-mega-cta="${ctaType}"><strong><a href="${escapeHtml(href)}">${escapeHtml(label)}</a></strong></p>`);
+      continue;
+    }
     const heading = line.match(/^(#{2,4})\s+(.+)$/);
     if (heading) {
       flushParagraph();
@@ -171,7 +180,7 @@ function newCard(post) {
   const excerpt = post.description || post.excerpt || `${post.title}. Read this guide from Aventura Dental Center.`;
   const date = post.date || '';
   const tag = post.tag || 'DentalTreatment';
-  return `          <a href="/blog/${escapeHtml(post.slug)}" class="post-card">\n            <span class="post-card__badge">${escapeHtml(tag)}</span>\n            <img src="${escapeHtml(image)}" alt="${escapeHtml(post.title)}" loading="lazy">\n            <div class="post-card__gradient" aria-hidden="true"></div>\n            <div class="post-card__content">\n              <h3>${escapeHtml(post.title)}</h3>\n              <p class="post-card__excerpt">${escapeHtml(excerpt)}</p>\n              <div class="post-card__meta">\n                <span class="post-card__author">${escapeHtml(post.author || 'Aventura Dental Center')}</span>\n                <span class="post-card__date">${escapeHtml(date)}${post.readTime ? ` · ${escapeHtml(post.readTime)} read` : ''}</span>\n              </div>\n              <div class="post-card__cta-row"><div class="post-card__arrow" aria-hidden="true">→</div></div>\n            </div>\n          </a>`;
+  return `          <a href="/blog/${escapeHtml(post.slug)}" class="post-card">\n            <span class="post-card__badge">${escapeHtml(tag)}</span>\n            <img src="${escapeHtml(image)}" alt="${escapeHtml(post.imageAlt || post.title)}" loading="lazy">\n            <div class="post-card__gradient" aria-hidden="true"></div>\n            <div class="post-card__content">\n              <h3>${escapeHtml(post.title)}</h3>\n              <p class="post-card__excerpt">${escapeHtml(excerpt)}</p>\n              <div class="post-card__meta">\n                <span class="post-card__author">${escapeHtml(post.author || 'Aventura Dental Center')}</span>\n                <span class="post-card__date">${escapeHtml(date)}${post.readTime ? ` · ${escapeHtml(post.readTime)} read` : ''}</span>\n              </div>\n              <div class="post-card__cta-row"><div class="post-card__arrow" aria-hidden="true">→</div></div>\n            </div>\n          </a>`;
 }
 
 function updateIndex(posts, current = currentCards()) {
@@ -186,6 +195,82 @@ function updateIndex(posts, current = currentCards()) {
     + index.slice(end);
   updated = updated.replace(/(<p class="blog-page-header__count scroll-animate">)\d+ posts found(<\/p>)/, `$1${posts.length} posts found$2`);
   fs.writeFileSync(blogIndexPath, updated);
+}
+
+function plainMarkdown(value = '') {
+  return String(value)
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/[*_`]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function faqEntries(markdown) {
+  const lines = markdown.split(/\r?\n/);
+  const start = lines.findIndex((line) => /^##\s+frequently asked questions\s*$/i.test(line.trim()));
+  if (start < 0) return [];
+  const entries = [];
+  let current = null;
+  for (const line of lines.slice(start + 1)) {
+    const heading = line.match(/^###\s+(.+)$/);
+    if (heading) {
+      if (current?.answer.length) entries.push(current);
+      current = { question: plainMarkdown(heading[1]), answer: [] };
+      continue;
+    }
+    if (/^##\s+/.test(line) && current) break;
+    if (current && line.trim()) current.answer.push(plainMarkdown(line));
+  }
+  if (current?.answer.length) entries.push(current);
+  return entries;
+}
+
+function schemaImage(post) {
+  const value = String(post.featuredImage || '').trim();
+  if (/^https:\/\//i.test(value)) return value;
+  return `${siteUrl}/img/${value || 'blog-hero.jpg'}`;
+}
+
+function postSchema(post, canonical, description) {
+  const image = schemaImage(post);
+  const graph = [
+    {
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description,
+      image,
+      datePublished: post.date || undefined,
+      dateModified: post.modified || post.date || undefined,
+      author: { '@type': 'Organization', name: 'Aventura Dental Center' },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Aventura Dental Center',
+        logo: { '@type': 'ImageObject', url: `${siteUrl}/img/aventura-dental-center.webp` },
+      },
+      mainEntityOfPage: canonical,
+      url: canonical,
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteUrl}/blog` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: canonical },
+      ],
+    },
+  ];
+  const questions = faqEntries(post.body);
+  if (questions.length) {
+    graph.push({
+      '@type': 'FAQPage',
+      mainEntity: questions.map(({ question, answer }) => ({
+        '@type': 'Question',
+        name: question,
+        acceptedAnswer: { '@type': 'Answer', text: answer.join(' ') },
+      })),
+    });
+  }
+  return `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>`;
 }
 
 function renderNewPages(posts, cards) {
@@ -203,14 +288,20 @@ function renderNewPages(posts, cards) {
     const image = heroSrc(post, '../img/');
     const canonical = `${siteUrl}/blog/${post.slug}`;
     const description = post.description || post.excerpt || post.title;
+    const socialTitle = `${post.title} | Aventura Dental Center`;
     const pageHead = head
-      .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(post.title)} | Aventura Dental Center</title>`)
+      .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(socialTitle)}</title>`)
       .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${escapeHtml(description)}">`)
       .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${canonical}">`)
-      .replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${escapeHtml(post.title)} | Aventura Dental Center">`)
+      .replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${escapeHtml(socialTitle)}">`)
       .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${escapeHtml(description)}">`)
-      .replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${canonical}">`);
-    const body = `<main id="main" tabindex="-1">\n    <section class="section section--blog-post blog-post-page-top" aria-labelledby="blog-post-heading">\n      <div class="container">\n        <div class="blog-post-layout scroll-animate">\n          <article class="blog-post-main">\n            <nav class="breadcrumb breadcrumb--light" aria-label="Breadcrumb"><a href="/">Home</a> &gt; <a href="/blog">Blog</a> &gt; ${escapeHtml(post.title)}</nav>\n            <h1 class="blog-post-title" id="blog-post-heading">${escapeHtml(post.title)}</h1>\n            <div class="blog-post-meta-row"><p>Published ${escapeHtml(post.date || '')} by <a href="/blog">${escapeHtml(post.author || 'Aventura Dental Center')}</a></p><a href="/blog" class="blog-post-category">${escapeHtml(post.tag || 'DentalTreatment')}</a></div>\n            <div class="blog-post-featured"><img src="${escapeHtml(image)}" alt="${escapeHtml(post.title)}" fetchpriority="high"></div>\n            <div class="blog-post-prose">${markdownToHtml(post.body)}</div>\n          </article>\n        </div>\n      </div>\n    </section>\n  </main>`;
+      .replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${canonical}">`)
+      .replace(/<meta property="og:image" content="[^"]*">/, `<meta property="og:image" content="${escapeHtml(schemaImage(post))}">`)
+      .replace(/<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${escapeHtml(socialTitle)}">`)
+      .replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${escapeHtml(description)}">`)
+      .replace(/<meta name="twitter:image" content="[^"]*">/, `<meta name="twitter:image" content="${escapeHtml(schemaImage(post))}">`)
+      .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, postSchema(post, canonical, description));
+    const body = `<main id="main" tabindex="-1">\n    <section class="section section--blog-post blog-post-page-top" aria-labelledby="blog-post-heading">\n      <div class="container">\n        <div class="blog-post-layout scroll-animate">\n          <article class="blog-post-main">\n            <nav class="breadcrumb breadcrumb--light" aria-label="Breadcrumb"><a href="/">Home</a> &gt; <a href="/blog">Blog</a> &gt; ${escapeHtml(post.title)}</nav>\n            <h1 class="blog-post-title" id="blog-post-heading">${escapeHtml(post.title)}</h1>\n            <div class="blog-post-meta-row"><p>Published ${escapeHtml(post.date || '')} by <a href="/blog">${escapeHtml(post.author || 'Aventura Dental Center')}</a></p><a href="/blog" class="blog-post-category">${escapeHtml(post.tag || 'DentalTreatment')}</a></div>\n            <div class="blog-post-featured"><img src="${escapeHtml(image)}" alt="${escapeHtml(post.imageAlt || post.title)}" fetchpriority="high"></div>\n            <div class="blog-post-prose">${markdownToHtml(post.body)}</div>\n          </article>\n        </div>\n      </div>\n    </section>\n  </main>`;
     fs.writeFileSync(output, `${pageHead}${body}${tail}`);
   }
 }
