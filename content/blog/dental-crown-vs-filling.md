@@ -3,7 +3,7 @@ url: "/blog/dental-crown-vs-filling"
 date: "2026-11-09"
 title: "Dental crown vs filling: What Patients Should Know"
 readTime: 13
-description: "Compare crowns and fillings by tooth coverage, purpose, treatment steps and care, and learn what a dentist considers when discussing options."
+description: "Dental crown vs filling: compare tooth coverage, purpose, treatment steps, durability, care, and the questions dentists consider when planning restoration."
 featuredImage: "https://zleague-public-prod.s3.us-east-2.amazonaws.com/article_images/9d7ec1e1-7adf-47e1-a665-8721fdf726a1/dental-crown-vs-filling-what-patients-should-know-418904.webp"
 id: "item_x3g30cqt354t31ypwpexdf9mb0"
 ---
@@ -12,7 +12,7 @@ Choosing between a dental crown vs filling depends on how much of the tooth is a
 
 [Call to arrange a dental evaluation](tel:+13059332501)
 
-## What is the difference between a crown and a filling?
+## Dental crown vs filling: What is the difference?
 
 A filling restores a defined area of a tooth. After the dentist removes affected tissue and prepares the space, filling material is placed into that area and shaped. The restoration is contained within the prepared part of the tooth, although its size and shape depend on the extent and location of the problem.
 
@@ -20,7 +20,7 @@ A crown is a restoration that fits over the visible portion of a tooth. It cover
 
 The distinction is not simply “small problem” versus “large problem.” A dentist looks at the location and depth of damage, remaining healthy tooth, the condition of existing dental work, and the tooth’s role in biting. Two teeth with similar-looking cavities may need different plans because what lies beneath the visible surface, or the support around each restoration, can differ.
 
-How much tooth structure does each option cover?
+## Dental crown vs filling: How much tooth structure does each option cover?
 
 A filling occupies the space prepared within a tooth. The dentist aims to remove affected tissue while preserving healthy structure where possible, then builds the restoration inside the prepared area. Depending on the size and position of the damage, the filling may involve one surface or extend across more than one surface. The name “filling” alone does not tell you how much healthy tooth remains.
 
