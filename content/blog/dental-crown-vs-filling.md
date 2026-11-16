@@ -114,7 +114,7 @@ At Aventura Dental Center, patients can discuss restorative and general dental c
 
 To learn about the practice’s [dental services](https://aventuradentalcenter.com/services) or review its [patient FAQs](https://aventuradentalcenter.com/faq), use the information available on its website.
 
-[Call to discuss your restorative care questions](tel:+13059332501)
+[Discuss your restorative care questions](https://aventuradentalcenter.com/contact)
 
 ## Frequently asked questions
 
