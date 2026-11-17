@@ -56,6 +56,18 @@ function markdownToHtml(markdown) {
     .replace(/__([^_]+)__/g, '<strong>$1</strong>')
     .replace(/\*([^*]+)\*/g, '<em>$1</em>')
     .replace(/_([^_]+)_/g, '<em>$1</em>');
+  const tableRow = (line) => {
+    if (!line.trim().startsWith('|') || !line.trim().endsWith('|')) return null;
+    return line.trim().slice(1, -1).split('|').map((cell) => cell.trim());
+  };
+  const isTableDivider = (line) => {
+    const cells = tableRow(line);
+    return cells?.length > 0 && cells.every((cell) => /^:?-{3,}:?$/.test(cell));
+  };
+  const renderTable = (header, rows) => {
+    const renderRow = (cells, tag) => `<tr>${cells.map((cell) => `<${tag}>${inline(cell)}</${tag}>`).join('')}</tr>`;
+    return `<table>\n<thead>${renderRow(header, 'th')}</thead>\n<tbody>${rows.map((row) => renderRow(row, 'td')).join('\n')}</tbody>\n</table>`;
+  };
   const flushParagraph = () => {
     if (paragraph.length) {
       html.push(`<p>${inline(paragraph.join(' '))}</p>`);
@@ -68,7 +80,8 @@ function markdownToHtml(markdown) {
       list = null;
     }
   };
-  for (const line of lines) {
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index];
     if (!line.trim()) {
       flushParagraph();
       closeList();
@@ -92,6 +105,24 @@ function markdownToHtml(markdown) {
       const text = heading[2].replace(/[`*_]/g, '');
       const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
       html.push(`<h${level} id="${escapeHtml(id)}">${inline(text)}</h${level}>`);
+      continue;
+    }
+    const header = tableRow(line);
+    if (header && isTableDivider(lines[index + 1] || '')) {
+      flushParagraph();
+      closeList();
+      const rows = [];
+      index += 2;
+      while (index < lines.length) {
+        const row = tableRow(lines[index]);
+        if (!row) {
+          index -= 1;
+          break;
+        }
+        rows.push(row);
+        index += 1;
+      }
+      html.push(renderTable(header, rows));
       continue;
     }
     const item = line.match(/^[-*]\s+(.+)$/);
