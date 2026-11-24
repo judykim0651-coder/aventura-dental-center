@@ -10,7 +10,7 @@ id: "item_7vb12kq1n53j3ajestgc28t3f8"
 
 What is gum disease? It is a group of conditions that affect the tissues around and under the teeth. It often starts as inflammation at the gumline. More advanced disease can affect the structures that hold teeth in place. Early changes may be mild, so knowing what to watch for, and what a dental exam can clarify, helps you choose a sensible next step. If you want a local evaluation, the practice's [gum disease treatment](https://aventuradentalcenter.com/services/gum-disease-treatment) page explains the examination-led options available at the Aventura office.
 
-[**Call (305) 933-2501**](tel:+13059332501)
+[Call (305) 933-2501](tel:+13059332501)
 
 ## What is gum disease, in plain terms?
 
@@ -93,7 +93,7 @@ Prompt attention matters for swelling, significant pain, suspected infection, de
 
 **Takeaway:** if you are planning a visit, bring a current list of medicines and health conditions when you have one. Note when symptoms began, what seems to trigger them, and the questions you want answered. You do not need to know the cause before you call.
 
-[**Request an appointment**](https://aventuradentalcenter.com/contact)
+[Request an appointment](https://aventuradentalcenter.com/contact)
 
 ## Can gum disease be prevented?
 
