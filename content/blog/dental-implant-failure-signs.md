@@ -4,7 +4,7 @@ date: "2026-11-24"
 title: "Dental Implant Failure Signs: What Patients Should Know"
 readTime: 11
 description: "Learn which dental implant symptoms deserve prompt attention, what to do if they appear, and why an exam is needed to identify the cause."
-featuredImage: "https://zleague-public-prod.s3.us-east-2.amazonaws.com/article_images/9d7ec1e1-7adf-47e1-a665-8721fdf726a1/dental-implant-failure-signs-what-patients-should-know-416033.webp"
+featuredImage: dental-implant-failure-signs.webp
 id: "item_k6ymx699zn1wse60mfpqmxyxnr"
 ---
 
