@@ -3,12 +3,12 @@ url: "/blog/is-dentistry-a-doctor"
 date: "2026-11-25"
 title: "Is Dentistry a Doctor? Understanding Dental Care Roles"
 readTime: 12
-description: "Learn why dentists are doctors, what D.D.S. and D.M.D. mean, how dentists differ from physicians, and what to ask before a dental visit."
+description: "Is dentistry a doctor? Learn what D.D.S. and D.M.D. mean, how dentists differ from physicians, and what to ask before dental care. Contact Aventura Dental Center with your questions."
 featuredImage: "https://zleague-public-prod.s3.us-east-2.amazonaws.com/article_images/9d7ec1e1-7adf-47e1-a665-8721fdf726a1/is-dentistry-a-doctor-understanding-dental-care-roles-469052.webp"
 id: "item_j7sgcrcfrs6wfcfd7r194v5g98"
 ---
 
-If you have wondered, “is dentistry a doctor?” the short answer is yes: dentists are doctors who focus on oral health. A dentist with a D.D.S. or D.M.D. has earned a professional dental degree, but that credential is different from an M.D. or D.O. medical degree. Understanding the distinction can help you know what a dentist is trained to do, when another clinician may be involved, and what questions to ask before care.
+If you have wondered, “is dentistry a doctor?” the short answer is yes: dentists are doctors who focus on oral health. A dentist with a D.D.S. or D.M.D. has earned a professional dental degree, but that credential is different from an M.D. or D.O. medical degree. Understanding the distinction can help you know what a dentist is trained to do, when another clinician may be involved, and what questions to ask before care. For ongoing needs, explore our [family dental care](https://aventuradentalcenter.com/family-dentistry).
 
 [Request an appointment](https://aventuradentalcenter.com/contact)
 
